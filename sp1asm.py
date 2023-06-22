@@ -68,6 +68,10 @@ for i in range(len(fileIn)):
         while len(tempOut) < length:
             tempOut = "0" + tempOut
         output += tempOut
+    elif fileIn[i][2:4] == "##":
+        output += fileIn[i][0:2]
+        output += lenHex(len(fileIn[i][4:]))
+        output += fileIn[i][4:]
     else:
         output += fileIn[i]
 
