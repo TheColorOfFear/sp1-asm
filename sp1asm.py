@@ -42,44 +42,46 @@ jpPos = []
 
 #loop through once to find where jump points are
 for i in range(len(fileIn)):
-    if len(fileIn[i]) > 0:
-        if fileIn[i][0] == "j":
-            jpName.append(fileIn[i][1:])
+    item = fileIn[i].lstrip()
+    if len(item) > 0:
+        if item[0] == "j":
+            jpName.append(item[1:])
             jpPos.append(currentPos + 1)
             if jpPrint:
-                print("JP: " + fileIn[i][1:] + " :" + str(currentPos + 1))
+                print("JP: " + item[1:] + " :" + str(currentPos + 1))
         else:
-            if fileIn[i][0] in ["=", "g", ">", "<"]:
+            if item[0] in ["=", "g", ">", "<"]:
                 currentPos += (4 + length)
             else:
-                currentPos += len(fileIn[i])
+                currentPos += len(item)
 
 output = ""
 
 for i in range(len(fileIn)):
-    if len(fileIn[i]) > 0:
-        if fileIn[i][0] == "j":
+    item = fileIn[i].lstrip()
+    if len(item) > 0:
+        if item[0] == "j":
             pass
-        elif fileIn[i][0] in ["=","g", ">", "<"]:
-            if fileIn[i][0] == "g":
+        elif item[0] in ["=","g", ">", "<"]:
+            if item[0] == "g":
                 output += "06"
-            elif fileIn[i][0] == "=":
+            elif item[0] == "=":
                 output += "20"
-            elif fileIn[i][0] == ">":
+            elif item[0] == ">":
                 output += "21"
-            elif fileIn[i][0] == "<":
+            elif item[0] == "<":
                 output += "22"
             output += lenHex(length)
-            tempOut = str(jpPos[jpName.index(fileIn[i][1:])])
+            tempOut = str(jpPos[jpName.index(item[1:])])
             while len(tempOut) < length:
                 tempOut = "0" + tempOut
             output += tempOut
-        elif fileIn[i][2:4] == "##":
-            output += fileIn[i][0:2]
-            output += lenHex(len(fileIn[i][4:]))
-            output += fileIn[i][4:]
+        elif item[2:4] == "##":
+            output += item[0:2]
+            output += lenHex(len(item[4:]))
+            output += item[4:]
         else:
-            output += fileIn[i]
+            output += item
 
 if outName == "":
     print(output)
