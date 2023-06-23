@@ -52,6 +52,8 @@ for i in range(len(fileIn)):
         else:
             if item[0] in ["=", "g", ">", "<"]:
                 currentPos += (4 + length)
+            elif item[0] in ["@"]:
+                currentPos += (2 + length)
             else:
                 currentPos += len(item)
 
@@ -62,7 +64,7 @@ for i in range(len(fileIn)):
     if len(item) > 0:
         if item[0] == "j":
             pass
-        elif item[0] in ["=","g", ">", "<"]:
+        elif item[0] in ["=","g", ">", "<", "@"]:
             if item[0] == "g":
                 output += "06"
             elif item[0] == "=":
