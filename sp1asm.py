@@ -5,6 +5,9 @@ def lenHex(funcLength):
     funcOutput = hex(funcLength)[2:]
     while len(funcOutput) < 2:
         funcOutput = "0" + funcOutput
+    if len(funcOutput) > 2:
+        print("\nERROR: LENGTH\n")
+        raise SystemExit(0)
     return funcOutput
 
 #define some default variables
