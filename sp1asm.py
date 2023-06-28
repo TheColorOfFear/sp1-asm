@@ -57,6 +57,8 @@ for i in range(len(fileIn)):
                 currentPos += (4 + length)
             elif item[0] in ["@"]:
                 currentPos += (2 + length)
+            elif item[0] == "#":
+                pass
             else:
                 currentPos += len(item)
 
@@ -81,6 +83,8 @@ for i in range(len(fileIn)):
             while len(tempOut) < length:
                 tempOut = "0" + tempOut
             output += tempOut
+        elif item[0] == "#":
+            pass
         elif item[2:4] == "##":
             output += item[0:2]
             output += lenHex(len(item[4:]))
